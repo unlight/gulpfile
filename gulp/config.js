@@ -5,7 +5,6 @@ var config = {
 	html: {},
 };
 
-
 config.paths.js = path.join(dest, "js");
 
 config.dest = dest;
@@ -28,7 +27,7 @@ config.html.src = "src/index.html";
 
 config.server = {
 	port: 3000,
-	root: [dest],
+	root: [dest, ".", "./node_modules"],
 	reload: [
 		config.html.src
 	]
