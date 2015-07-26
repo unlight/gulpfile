@@ -4,20 +4,24 @@ var config = {};
 
 config.dest = dest;
 
-config.bumpfiles = {
-	src: ["package.json"],
-	dest: "./"
+config.eslint = {
+	src: "src/*.js"
 };
 
-config.less = {
-	root: "src/design",
-	src: "src/design/{style,srch-x-all}.less",
-	dest: "build/design/css"
+config.clientjs = {
+	src: "src/*.js"
+};
+
+config.serverjs = {
+	src: "server/*.js"
 };
 
 config.server = {
-	root: [dest]
-	watch: ["src/index.html", "src/*.js"]
+	port: 3000,
+	root: [dest],
+	reload: [
+		"src/index.html"
+	]
 };
 
 config.vendors = [
