@@ -37,4 +37,23 @@ config.vendors = [
 	"angular"
 ];
 
+Object.defineProperty(config, "production", {
+	get: function() {
+		var result = argv.production;
+		if (typeof result === "undefined") {
+			result = process.env.NODE_ENV === "production";
+		}
+		result = Boolean(result);
+		return result;
+	}
+});
+
+
+Object.defineProperty(config, "debug", {
+	get: function() {
+		result = !config.production;
+		return result;
+	}
+});
+
 module.exports = config;
