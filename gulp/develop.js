@@ -3,4 +3,8 @@ var util = require("./util");
 var basename = require("basename");
 var taskname = basename(__filename);
 
-gulp.task(taskname, gulp.parallel(""));
+gulp.task(taskname, gulp.series(
+	"clean",
+	gulp.parallel("watchscripts"),
+	"server"
+));

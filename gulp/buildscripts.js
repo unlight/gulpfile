@@ -8,11 +8,12 @@ var eslintp = require("./eslintp");
 
 gulp.task(taskname, function() {
 	var options = {
-		since: g.memoryCache.lastMtime("clientjs")
+		since: g.memoryCache.lastMtime("buildscripts")
 	};
-	return gulp.src(config.clientjs.src, options)
+	return gulp.src(config.scripts.src, options)
 		.pipe(eslintp())
-		.pipe(g.memoryCache("clientjs"))
+		.pipe(g.memoryCache("buildscripts"))
 		// concat or browserify goes here
-		.pipe(gulp.dest(config.dest));
+		.pipe(gulp.dest(config.scripts.dest))
+		// .pipe(g.connect.reload())
 });
