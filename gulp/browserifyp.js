@@ -6,7 +6,7 @@ var path = require("path");
 module.exports = function() {
 	var options = {
 		paths: ["node_modules", "src", "./"],
-		debug: true,
+		debug: config.debug,
 	};
 	return through2.obj(function(chunk, enc, callback) {
 		var b = browserify(options);
