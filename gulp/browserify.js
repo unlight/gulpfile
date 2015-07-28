@@ -5,7 +5,7 @@ var taskname = basename(__filename);
 var browserifyp = require("./browserifyp");
 
 gulp.task(taskname, function() {
-	gulp.src(config.scripts.main)
+	return gulp.src(config.scripts.main)
 		.pipe(browserifyp())
 		.pipe(gulp.dest(config.scripts.dest));
 

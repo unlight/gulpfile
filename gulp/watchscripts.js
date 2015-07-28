@@ -6,11 +6,10 @@ var eslintp = require("./eslintp");
 require("./buildscripts");
 
 gulp.task(taskname, function() {
-	var options = {
+	var w = g.watch(config.scripts.watch, {
 		ignoreInitial: false,
 		verbose: false
-	};
-	var w = g.watch(config.scripts.watch, options, g.batch(function(events, done) {
+	}, g.batch(function(events, done) {
 		gulp.series("buildscripts");
 		//events.pipe(g.connect.reload());
 		events.on("data", util.niceRelativePath);
