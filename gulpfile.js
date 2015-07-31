@@ -9,4 +9,8 @@ var taskname = argv._[0];
 global.gulp = gulp;
 global.g = g;
 global.argv = argv;
+global.t = function(task) {
+	require("./gulp/" + task);
+	return task;
+};
 require("./gulp/" + taskname);
