@@ -1,7 +1,6 @@
 var browserify = require("browserify");
 var config = require("./config");
 var through2 = require("through2");
-var path = require("path");
 
 module.exports = function() {
 	var options = {

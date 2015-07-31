@@ -2,12 +2,26 @@ var config = require("./config");
 var util = require("./util");
 var basename = require("basename");
 var taskname = basename(__filename);
+var browserifyMiddleware = require("browserify-middleware");
 
 gulp.task(taskname, function() {
 	g.connect.server({
 		root: config.server.root,
 		port: config.server.port || 3000,
-		livereload: true
+		livereload: true,
+		middleware: function(connect, opt) {
+			var browserifyHandler = browserifyMiddleware(config.scripts.main);
+			return [
+				function(req, res, next) {
+					var pathname = req._parsedUrl.pathname;
+					if (pathname === config.scripts.mainpath) {
+						browserifyHandler(req, res, next);
+						return;
+					}
+					next();
+				}
+			]
+		}
 	});
 
 	g.watch(config.server.reload, {

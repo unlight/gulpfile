@@ -1,4 +1,5 @@
 var streamCombiner = require("stream-combiner");
+var config = require("./config");
 
 var eslintp = function() {
 	// http://eslint.org/docs/configuring/
@@ -23,7 +24,9 @@ var eslintp = function() {
 	};
 	return streamCombiner(
 		g.eslint(conf),
-		g.eslint.formatEach("stylish", process.stdout)
+		// g.eslint.formatEach("stylish", process.stdout),
+		g.eslint.format(),
+		g.if(config.production, g.eslint.failOnError())
 	);
 };
 
