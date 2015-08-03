@@ -14,6 +14,7 @@ gulp.task(taskname, function() {
 		.pipe(eslintp())
 		// .pipe(g.memoryCache("scripts"))
 		.pipe(browserifyp())
+		.pipe(g.if(config.production, g.ngAnnotate()))
 		.pipe(gulp.dest(config.scripts.dest))
 		.pipe(g.connect.reload())
 });
