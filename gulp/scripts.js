@@ -1,10 +1,13 @@
 var config = require("./config");
-var basename = require("basename");
-var taskname = basename(__filename);
+var util = require("./util");
 var browserifyp = require("./browserifyp");
-var eslintp = require("./eslintp");
 
-gulp.task(taskname, function() {
+gulp.task("scripts.watch", function() {
+	var w = gulp.watch(config.scripts.watch, gulp.series("build.scripts"));
+	w.on("change", g.memoryCache.update("scripts"));
+});
+
+gulp.task("build.scripts", function() {
 	var options = {};
 	// if (config.cache) {
 	// 	options.since = g.memoryCache.lastMtime("scripts");

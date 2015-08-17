@@ -4,7 +4,7 @@ var basename = require("basename");
 var taskname = basename(__filename);
 var browserifyp = require("./browserifyp");
 
-require("./build.scripts");
+require("./scripts");
 require("./build.design");
 
 gulp.task(taskname, gulp.series(
