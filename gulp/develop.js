@@ -10,9 +10,10 @@ gulp.task(taskname, gulp.series([
 	t("clean"),
 	t("build"),
 	gulp.parallel(
-		t("watch.design"),
-		t("watch.htdocs"),
-		t("watch.eslint"),
+		t("scripts.watch"),
+		t("eslint.watch"),
+		t("design.watch"),
+		t("htdocs.watch"),
 		t("server")
 	)
 ]));
