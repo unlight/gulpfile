@@ -9,8 +9,7 @@ module.exports = function() {
 		external: config.vendors
 	};
 	return through2.obj(function(chunk, enc, callback) {
-		var b = browserify(options);
-		b.add(chunk.path);
+		var b = browserify(chunk.path, options);
 		b.bundle(function(err, buffer) {
 			if (err) throw err;
 			chunk.contents = buffer;
