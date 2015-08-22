@@ -21,7 +21,7 @@ config.design.root = "src/design";
 config.scripts = {};
 config.scripts.src = "src/scripts/**/*.ts"; // 1:1
 config.scripts.watch = "src/scripts/**/*.js";
-config.scripts.main = "src/scripts/main.js"; // Browserify entry point.
+config.scripts.main = "src/main.js"; // Browserify entry point.
 config.scripts.mainpath = "/js/main.js"; // Browserify middleware request path (starting with /) waiting fix https://github.com/AveVlad/gulp-connect/issues/138
 config.scripts.dest = path.join(dest, "js");
 
@@ -35,13 +35,13 @@ config.eslint.src = "src/scripts/**/*.js";
 config.eslint.watch = config.eslint.src;
 
 config.htdocs = {};
-config.htdocs.src = "src/scripts/index.html";
-config.htdocs.watch = "src/scripts/index.html";
+config.htdocs.src = "src/index.html";
+config.htdocs.watch = "src/index.html";
 config.htdocs.dest = dest;
 
 config.server = {
 	port: 3000,
-	root: [dest, ".", "./node_modules"],
+	root: [dest, "src", ".", "node_modules"],
 	reload: []
 };
 

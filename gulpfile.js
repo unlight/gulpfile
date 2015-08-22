@@ -5,12 +5,17 @@ var g = require("gulp-load-plugins")();
 var minimist = require("minimist");
 
 var argv = minimist(process.argv.slice(2));
-var taskname = argv._[0];
+var task = argv._[0];
 global.gulp = gulp;
 global.g = g;
 global.argv = argv;
-global.t = function(task) {
-	require("./gulp/" + task);
-	return task;
+global.t = function(name, needFile) {
+	var parts = name.split(".");
+	var firstPart = parts[0];
+	require("./gulp/" + firstPart);
+	if (needFile) {
+		name = firstPart;
+	}
+	return name;
 };
-require("./gulp/" + taskname);
+require("./gulp/" + t(task, true));

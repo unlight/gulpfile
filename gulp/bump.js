@@ -1,6 +1,6 @@
-var basename = require("basename");
-var taskname = basename;
 var config = require("./config");
+var basename = require("basename");
+var taskname = basename(__filename);
 
 gulp.task(taskname, function () {
 	// gulp bump -m

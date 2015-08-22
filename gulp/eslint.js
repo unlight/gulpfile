@@ -12,3 +12,16 @@ gulp.task(taskname, function() {
 		.pipe(eslintp())
 		// .pipe(g.memoryCache("scripts"))
 });
+
+gulp.task(taskname + ".watch", function() {
+	g.watch(config.eslint.watch, {
+		ignoreInitial: true,
+		verbose: false
+	}, g.batch(function(events, done) {
+		events.on("data", util.niceRelativePath);
+		events
+			.pipe(eslintp())
+			// .pipe(g.connect.reload())
+		events.on("end", done);
+	}));
+});
