@@ -5,21 +5,27 @@ var taskname = basename(__filename);
 var browserifyMiddleware = require("browserify-middleware");
 
 gulp.task(taskname, function() {
+	var serverRoot = config.server.root;
+	if (config.production) serverRoot = config.dest;
 	g.connect.server({
-		root: config.server.root,
+		root: serverRoot,
 		port: config.server.port || 3000,
 		livereload: true,
 		middleware: function(connect, opt) {
+			if (config.production) {
+				return [];
+			}
 			var browserifyHandler = browserifyMiddleware(config.scripts.main);
-			return [
-				function(req, res, next) {
-					var pathname = req._parsedUrl.pathname;
-					if (pathname === config.scripts.mainpath) {
-						browserifyHandler(req, res, next);
-						return;
-					}
-					next();
+			var browserifyMd = function(req, res, next) {
+				var pathname = req._parsedUrl.pathname;
+				if (pathname === config.scripts.mainpath) {
+					browserifyHandler(req, res, next);
+					return;
 				}
+				next();
+			};
+			return [
+				browserifyMd
 			]
 		}
 	});

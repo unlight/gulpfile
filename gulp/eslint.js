@@ -1,14 +1,22 @@
 /* global gulp */
 var config = require("./config");
-var basename = require("basename");
-var taskname = basename(__filename);
+var util = require("./util");
 var eslintp = require("./eslintp");
 
-gulp.task(taskname, function() {
-	var options = {
-		// since: gulp.lastRun(taskname)
-	};
-	return gulp.src(config.eslint.src, options)
+gulp.task("eslint", function() {
+	return gulp.src(config.scripts.watch)
 		.pipe(eslintp())
-		// .pipe(g.memoryCache("scripts"))
+		.pipe(g.if(config.debug, g.plumber()));
+});
+
+gulp.task("eslint.watch", function() {
+	g.watch(config.eslint.watch, {
+		ignoreInitial: true,
+		verbose: false
+	}, g.batch(function(events, done) {
+		events.on("data", util.niceRelativePath);
+		events
+			.pipe(eslintp())
+		events.on("end", done);
+	}));
 });

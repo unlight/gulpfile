@@ -6,24 +6,28 @@ var config = {};
 config.dest = dest;
 
 config.bump = {
-	src: ["package.json"],
-	dest: "./"
+	src: [
+		"package.json", 
+		"src/backend/SearchUI/app.json"
+	],
+	dest: "./",
+	dest2: "src/backend/SearchUI"
 };
 
 config.design = {};
 config.design.src = "src/design/style.less";
 config.design.watch = "src/design/*.less";
-config.design.dest = path.join(dest, "design/css");
+config.design.dest = path.join(dest, "VersionedResources/design/css");
 config.design.root = "src/design";
 
 
 // Client javascript.
 config.scripts = {};
-config.scripts.src = "src/scripts/**/*.ts"; // 1:1
+config.scripts.src = "src/scripts/**/*.js"; // 1:1
 config.scripts.watch = "src/scripts/**/*.js";
 config.scripts.main = "src/scripts/main.js"; // Browserify entry point.
 config.scripts.mainpath = "/js/main.js"; // Browserify middleware request path (starting with /) waiting fix https://github.com/AveVlad/gulp-connect/issues/138
-config.scripts.dest = path.join(dest, "js");
+config.scripts.dest = path.join(dest, "VersionedResources/js");
 
 // Server javascript.
 config.sources = {};
@@ -35,9 +39,31 @@ config.eslint.src = "src/scripts/**/*.js";
 config.eslint.watch = config.eslint.src;
 
 config.htdocs = {};
-config.htdocs.src = "src/scripts/index.html";
-config.htdocs.watch = "src/scripts/index.html";
+config.htdocs.src = "src/backend/SearchUI/index.html";
+config.htdocs.watch = "src/backend/SearchUI/index.html";
 config.htdocs.dest = dest;
+
+config.backend = {};
+config.backend.solution = "src/backend/SearchUI.sln";
+config.backend.src = [
+	"src/backend/SearchUI/bin/Debug/**/*.{dll,pdb}",
+	"src/backend/SearchUI/bin/Debug/app.json"
+];
+config.backend.watch = config.backend.src;
+
+config.fonts = {
+	src: [
+		"node_modules/EikonWebUI/core/themes/solar/fonts/**/*.*"
+	],
+	dest: "build/VersionedResources/design/fonts"
+};
+
+config.images = {
+	src: [
+		"node_modules/EikonWebUI/core/themes/solar/images/**/*.*"
+	],
+	dest: "build/VersionedResources/design/images/solar"
+};
 
 config.server = {
 	port: 3000,

@@ -10,5 +10,9 @@ gulp.task(taskname, gulp.series(
 		t("fonts"),
 		t("images")
 	),
-	t("build.htdocs")
+	gulp.parallel(
+		t("backend.build"),
+		t("htdocs.build")
+	)
+	
 ));
