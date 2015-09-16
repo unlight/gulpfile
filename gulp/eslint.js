@@ -4,7 +4,7 @@ var util = require("./util");
 var eslintp = require("./eslintp");
 
 gulp.task("eslint", function() {
-	return gulp.src(config.scripts.watch)
+	return gulp.src(config.scripts.src)
 		.pipe(eslintp())
 		.pipe(g.if(config.debug, g.plumber()));
 });

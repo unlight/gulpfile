@@ -5,7 +5,14 @@ var eslintp = function() {
 	// http://eslint.org/docs/configuring/
 	// http://eslint.org/docs/rules/
 	var conf = {
+		plugins: [
+			"angular"
+		],
 		rules: {
+			// Angular.
+			"angular/di": [2, "function or array"],
+			"angular/typecheck-array": 0,
+			// Eslint.
 			"no-use-before-define": [0, "nofunc"],
 			"curly": 0,
 			"comma-dangle": 1,

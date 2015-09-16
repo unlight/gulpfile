@@ -5,16 +5,19 @@ var config = require("./config");
 var util = require("./util");
 var basename = require("basename");
 var taskname = basename(__filename);
+var open = require("open");
 
 gulp.task(taskname, gulp.series([
 	t("clean"),
 	t("build"),
 	gulp.parallel(
 		t("scripts.watch"),
-		t("eslint.watch"),
 		t("design.watch"),
 		t("htdocs.watch"),
-		t("backend.watch"),
-		t("server")
+		t("eslint.watch"),
+		t("server"),
+		function() {
+			open("http://localhost:3000");
+		}
 	)
 ]));

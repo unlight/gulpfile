@@ -9,11 +9,11 @@ var task = argv._[0];
 global.gulp = gulp;
 global.g = g;
 global.argv = argv;
-global.t = function(name, needFile) {
+global.t = function(name, isMain) {
 	var parts = name.split(".");
 	var firstPart = parts[0];
 	require("./gulp/" + firstPart);
-	if (needFile) {
+	if (isMain) {
 		name = firstPart;
 	}
 	return name;

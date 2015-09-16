@@ -6,73 +6,51 @@ var config = {};
 config.dest = dest;
 
 config.bump = {
-	src: [
-		"package.json", 
-		"src/backend/SearchUI/app.json"
-	],
-	dest: "./",
-	dest2: "src/backend/SearchUI"
+	src: ["package.json"],
+	dest: "./"
 };
 
 config.design = {};
-config.design.src = "src/design/style.less";
-config.design.watch = "src/design/*.less";
-config.design.dest = path.join(dest, "VersionedResources/design/css");
+config.design.src = "src/design/custom.css";
+config.design.watch = config.design.src;
+config.design.dest = path.join(dest, "design", "css");
 config.design.root = "src/design";
-
 
 // Client javascript.
 config.scripts = {};
-config.scripts.src = "src/scripts/**/*.js"; // 1:1
-config.scripts.watch = "src/scripts/**/*.js";
-config.scripts.main = "src/scripts/main.js"; // Browserify entry point.
+config.scripts.src = ["src/js/**/*.js", "!src/js/**/*.spec.js"];
+config.scripts.watch = config.scripts.src;
+config.scripts.main = "src/js/main.js"; // Browserify entry point.
 config.scripts.mainpath = "/js/main.js"; // Browserify middleware request path (starting with /) waiting fix https://github.com/AveVlad/gulp-connect/issues/138
-config.scripts.dest = path.join(dest, "VersionedResources/js");
+config.scripts.dest = path.join(dest, "js");
 
 // Server javascript.
 config.sources = {};
-config.sources.src = "src/js/**/*.js";
-config.sources.watch = "src/js/**/*.js";
+config.sources.src = ["src/ts/**/*.ts"];
+config.sources.watch = config.sources.src;
 
 config.eslint = {};
-config.eslint.src = "src/scripts/**/*.js";
-config.eslint.watch = config.eslint.src;
+config.eslint.src = config.scripts.src;
+config.eslint.watch = config.scripts.watch;
 
 config.htdocs = {};
-config.htdocs.src = "src/backend/SearchUI/index.html";
-config.htdocs.watch = "src/backend/SearchUI/index.html";
+config.htdocs.src = ["src/**/*.html"];
+config.htdocs.watch = config.htdocs.src;
 config.htdocs.dest = dest;
-
-config.backend = {};
-config.backend.solution = "src/backend/SearchUI.sln";
-config.backend.src = [
-	"src/backend/SearchUI/bin/Debug/**/*.{dll,pdb}",
-	"src/backend/SearchUI/bin/Debug/app.json"
-];
-config.backend.watch = config.backend.src;
-
-config.fonts = {
-	src: [
-		"node_modules/EikonWebUI/core/themes/solar/fonts/**/*.*"
-	],
-	dest: "build/VersionedResources/design/fonts"
-};
-
-config.images = {
-	src: [
-		"node_modules/EikonWebUI/core/themes/solar/images/**/*.*"
-	],
-	dest: "build/VersionedResources/design/images/solar"
-};
 
 config.server = {
 	port: 3000,
-	root: [dest, ".", "./node_modules"],
+	root: [dest, "./src", "./node_modules", "."],
 	reload: []
 };
 
 config.vendors = [
-	"angular"
+	"angular",
+	"angular-route",
+	"angular-resource",
+	"angular-ui-bootstrap",
+	"angular-mocks/ngMockE2E",
+	"angular-local-storage/dist/angular-local-storage"
 ];
 
 Object.defineProperty(config, "production", {

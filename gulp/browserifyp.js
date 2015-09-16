@@ -2,11 +2,13 @@ var browserify = require("browserify");
 var config = require("./config");
 var through2 = require("through2");
 
-module.exports = function() {
-	var options = {
-		paths: ["src/scripts", "src", "node_modules", "./"],
-		debug: true,
-	};
+var options = {
+	paths: ["src/scripts", "src", "node_modules", "./"],
+	debug: true,
+	transform: ["brfs"]
+};
+
+function browserifyp() {
 	return through2.obj(function(chunk, enc, callback) {
 		var b = browserify(chunk.path, options);
 		b.bundle(function(err, buffer) {
@@ -16,3 +18,6 @@ module.exports = function() {
 		});
 	});
 };
+
+module.exports = browserifyp;
+module.exports.options = options;

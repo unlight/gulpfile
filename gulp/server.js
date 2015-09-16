@@ -1,3 +1,5 @@
+/* global gulp */
+/// <reference path="../typings/gulp/gulp.d.ts"/>
 var config = require("./config");
 var util = require("./util");
 var basename = require("basename");
@@ -5,27 +7,25 @@ var taskname = basename(__filename);
 var browserifyMiddleware = require("browserify-middleware");
 
 gulp.task(taskname, function() {
-	var serverRoot = config.server.root;
-	if (config.production) serverRoot = config.dest;
+	var root = config.server.root;
+	if (config.production) {
+		root = config.server.root[0];
+	}
 	g.connect.server({
-		root: serverRoot,
+		root: root,
 		port: config.server.port || 3000,
 		livereload: true,
 		middleware: function(connect, opt) {
-			if (config.production) {
-				return [];
-			}
 			var browserifyHandler = browserifyMiddleware(config.scripts.main);
-			var browserifyMd = function(req, res, next) {
-				var pathname = req._parsedUrl.pathname;
-				if (pathname === config.scripts.mainpath) {
-					browserifyHandler(req, res, next);
-					return;
-				}
-				next();
-			};
 			return [
-				browserifyMd
+				function(req, res, next) {
+					var pathname = req._parsedUrl.pathname;
+					if (pathname === config.scripts.mainpath) {
+						browserifyHandler(req, res, next);
+						return;
+					}
+					next();
+				}
 			]
 		}
 	});

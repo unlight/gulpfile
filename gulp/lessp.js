@@ -5,7 +5,7 @@ var lessp = function () {
 	return streamCombiner([
 		g.if(config.debug, g.sourcemaps.init()),
 		g.less(),
-		g.if(config.debug, g.sourcemaps.write("./"))
+		g.if(config.debug, g.sourcemaps.write())
 	]);
 };
 
