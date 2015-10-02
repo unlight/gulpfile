@@ -1,9 +1,7 @@
 var config = require("./config");
-// var util = require("./util");
 var eslintp = require("./eslintp");
-var source = require("vinyl-source-stream");
-var buffer = require("vinyl-buffer");
 var browserify = require("browserify");
+var buffer = require("vinyl-buffer");
 
 gulp.task("scripts.browserify", function() {
 	var options = {
@@ -18,7 +16,6 @@ gulp.task("scripts.browserify", function() {
 		b.external(v);
 	});
 	return b.bundle()
-		.pipe(source("main.js"))
 		.pipe(buffer())
 		.pipe(g.sourcemaps.init({loadMaps: true}))
 		.pipe(g.if(config.production, g.ngAnnotate()))

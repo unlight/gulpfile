@@ -2,13 +2,10 @@
 /// <reference path="typings/gulp/gulp.d.ts" />
 var gulp = require("gulp");
 var g = require("gulp-load-plugins")();
-var minimist = require("minimist");
+var task = g.util.env._[0];
 
-var argv = minimist(process.argv.slice(2));
-var task = argv._[0];
 global.gulp = gulp;
 global.g = g;
-global.argv = argv;
 global.t = function(name, isMain) {
 	var parts = name.split(".");
 	var firstPart = parts[0];

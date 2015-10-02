@@ -1,4 +1,3 @@
-/* global argv */
 var path = require("path");
 var dest = path.resolve(__dirname, "../build");
 var config = {};
@@ -18,7 +17,7 @@ config.design.root = "src/design";
 
 // Client javascript.
 config.scripts = {};
-config.scripts.src = ["src/js/**/*.js", "!src/js/**/*.spec.js"];
+config.scripts.src = "src/**/*.js";
 config.scripts.watch = config.scripts.src;
 config.scripts.main = "src/js/main.js"; // Browserify entry point.
 config.scripts.mainpath = "/js/main.js"; // Browserify middleware request path (starting with /) waiting fix https://github.com/AveVlad/gulp-connect/issues/138
@@ -55,7 +54,7 @@ config.vendors = [
 
 Object.defineProperty(config, "production", {
 	get: function() {
-		var result = argv.production;
+		var result = g.util.env.production;
 		if (typeof result === "undefined") {
 			result = process.env.NODE_ENV === "production";
 		}
@@ -73,7 +72,7 @@ Object.defineProperty(config, "debug", {
 
 Object.defineProperty(config, "cache", {
 	get: function() {
-		var result = argv.cache;
+		var result = g.util.env.cache;
 		return result;
 	}
 });

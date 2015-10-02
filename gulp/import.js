@@ -17,7 +17,7 @@ gulp.task(taskname, function (done) {
 			g.util.log("Imported application", g.util.colors.yellow(app.name), "version", g.util.colors.green(app.version));
 		});
 		response.on("end", function() {
-			if (argv.o === true) {
+			if (g.util.env.o === true) {
 				var opencmd = format("http://localhost:10030/Apps/{name}/{version}", app);
 				open(opencmd);
 			}

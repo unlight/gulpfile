@@ -7,9 +7,9 @@ var config = require("./config");
 gulp.task("publish", function (done) {
 	var info = {
 		applicationPath: config.dest,
-		user: argv.user,
-		password: argv.password,
-		environment: argv.environment || "Alpha"
+		user: g.util.env.user,
+		password: g.util.env.password,
+		environment: g.util.env.environment || "Alpha"
 	};
 	var command = "C:\\EAE\\bin\\Publisher\\TR.AppServer.Publisher.exe -e {environment} -a WebApp -f {applicationPath} -u {user} -p {password}";
 	command = format(command, info);

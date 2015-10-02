@@ -5,7 +5,7 @@ var config = require("./config");
 gulp.task(taskname, function () {
 	// gulp bump -m
 	var options = {};
-	if (argv.m) {
+	if (g.util.env.m) {
 		options.type = "minor";
 	}
 	gulp.src(config.bump.src)

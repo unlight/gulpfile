@@ -7,8 +7,8 @@ var taskname = basename(__filename);
 
 // Usage: gulp svnmove --source=..\Content_SearchV3\SearchV3.data\ThomsonReuters.SearchV3.Common\Usage --destination=ThomsonReuters.SearchV3.Common\Usage
 gulp.task(taskname, function (done) {
-	var sourcePath = argv.source;
-	var destinationPath = argv.destination;
+	var sourcePath = g.util.env.source;
+	var destinationPath = g.util.env.destination;
 	if (!sourcePath || !destinationPath) {
 		throw "source or destination is missing.";
 	}
