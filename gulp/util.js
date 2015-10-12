@@ -1,5 +1,8 @@
 exports.niceRelativePath = function(file) {
-	var niceRelativePath = file.path.slice(file.cwd.length + 1);
+	var niceRelativePath = file;
+	if (file.path && file.cwd) { // vinyl file
+		niceRelativePath = file.path.slice(file.cwd.length + 1);	
+	}
 	g.util.log(g.util.colors.magenta(niceRelativePath), "was changed");
 };
 
