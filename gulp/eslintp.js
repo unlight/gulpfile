@@ -33,11 +33,23 @@ var eslintp = function() {
 			node: true
 		}
 	};
-	return streamCombiner(
+	// var merge = require("gulp-merge");
+	var merge = require("merge2");
+	var es = require('event-stream');
+
+	var streamqueue = require('streamqueue');
+
+	var r = streamqueue({ objectMode: true },
 		g.eslint(conf),
 		g.eslint.format(),
 		g.if(config.production, g.eslint.failOnError())
 	);
+	return r;
+	// return streamCombiner(
+	// 	g.eslint(conf),
+	// 	g.eslint.format(),
+	// 	g.if(config.production, g.eslint.failOnError())
+	// );
 };
 
 module.exports = eslintp;
